@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/bloc/reddit_bloc/reddit_bloc.dart';
 import 'package:reddit_clone/bloc/settings_bloc/settings_bloc.dart';
-import 'package:reddit_clone/gen/colors.gen.dart';
 import 'package:reddit_clone/manager/theme_manager.dart';
-import 'package:reddit_clone/screen/entry_detail_screen.dart';
 import 'package:reddit_clone/widget/empty_list_widget.dart';
 import 'package:reddit_clone/widget/failed_widget.dart';
+
+import '../widget/entry_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
         body: BlocBuilder<RedditBloc, RedditState>(
           bloc: redditBloc,
           builder: (context, state) {
-            print(state);
             if (state is GetFlutterDevInProgressState) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -77,66 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: state.entries.length,
                     itemBuilder: (context, index) {
                       var item = state.entries[index];
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: ListTile(
-                            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EntryDetailScreen(entry: item),
-                            )),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(
-                                  item.data?.thumbnail ?? '',
-                                  width: double.infinity,
-                                  fit: BoxFit.fitWidth,
-                                  errorBuilder: (context, error, stackTrace) => const SizedBox(),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    item.data?.title ?? '',
-                                  ),
-                                ),
-                              ],
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.data?.selfText ?? '',
-                                  maxLines: 7,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(height: 15),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.favorite,
-                                          color: ColorName.bourbon,
-                                          size: 16,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          item.data?.ups?.toString() ?? '',
-                                          style: Theme.of(context).textTheme.caption,
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      item.data?.createdUtc.toString() ?? '',
-                                      style: Theme.of(context).textTheme.caption,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+
+                      return EntryListItem(
+                        entry: item,
                       );
                     }),
               );
