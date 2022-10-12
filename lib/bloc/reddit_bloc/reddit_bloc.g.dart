@@ -13,8 +13,8 @@ class GetFlutterDevEvent extends RedditEvent {}
 class GetFlutterDevInProgressState extends RedditState {}
 
 class GetFlutterDevCompletedState extends RedditState {
-  final RedditResponse redditResponse;
-  GetFlutterDevCompletedState({required this.redditResponse});
+  final List<Entry> entries;
+  GetFlutterDevCompletedState({required this.entries});
 }
 
 class GetFlutterDevFailedState extends RedditState {

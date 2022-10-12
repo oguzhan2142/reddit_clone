@@ -16,40 +16,10 @@ class NetworkManager {
     }
   }
 
-  Future<Either<ResponseFailure, T>> getAsSingle<T>({
-    required String path,
-    required T Function(Map<String, dynamic> json) converter,
-    String? rootKey,
-    Map<String, dynamic>? queryParameters,
-  }) async {
-    try {
-      var response = await client.get(
-        path,
-        queryParameters: queryParameters,
-      );
-
-      Map<String, dynamic> dataMap;
-
-      var data = response.data;
-
-      if (rootKey != null) {
-        dataMap = data[rootKey];
-      } else {
-        dataMap = data;
-      }
-
-      final model = converter(dataMap);
-
-      return Right(model);
-    } catch (e) {
-      return Left(ResponseFailure.unknown());
-    }
-  }
-
   Future<Either<ResponseFailure, List<T>>> getAsList<T>({
     required String path,
     required T Function(Map<String, dynamic> json) converter,
-    String? rootKey,
+    List<String>? rootKeys,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
@@ -58,12 +28,17 @@ class NetworkManager {
         queryParameters: queryParameters,
       );
 
-      List dataList;
+      List dataList = [];
 
       var data = response.data;
 
-      if (rootKey != null) {
-        dataList = data[rootKey];
+      if (rootKeys != null) {
+        var temp = data;
+        for (var key in rootKeys) {
+          temp = temp[key];
+        }
+
+        dataList = temp;
       } else {
         dataList = data;
       }
@@ -72,6 +47,7 @@ class NetworkManager {
 
       return Right(listOfT);
     } catch (e) {
+      print(e);
       return Left(ResponseFailure.unknown());
     }
   }

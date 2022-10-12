@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_use_case_generator/bloc_generator.dart';
 import 'package:reddit_clone/manager/cache_manager.dart';
-import 'package:reddit_clone/model/reddit_response.dart';
+import 'package:reddit_clone/model/entry.dart';
 import 'package:reddit_clone/model/response_failure.dart';
 import 'package:reddit_clone/repository/local_reddit_repository.dart';
 import 'package:reddit_clone/repository/remote_reddit_repository.dart';
@@ -28,7 +28,7 @@ class RedditState {}
   blocUseCases: [
     BlocUseCase(
       name: 'GetFlutterDev',
-      output: {'redditResponse': RedditResponse},
+      output: {'entries': List<Entry>},
     )
   ],
 )
@@ -50,14 +50,14 @@ class RedditBloc extends Bloc<RedditEvent, RedditState> {
 
     final foldedRemoteFailureOrModel = eitherRemoteFailureOrModel.fold((l) => l, (r) => r);
 
-    if (foldedRemoteFailureOrModel is RedditResponse) {
+    if (foldedRemoteFailureOrModel is List<Entry>) {
       // if we have got any data then save it local
-      CacheManager.instance.saveRedditResponse(
-        redditResponse: foldedRemoteFailureOrModel,
+      CacheManager.instance.saveRedditResponses(
+        entries: foldedRemoteFailureOrModel,
       );
 
-      emit(GetFlutterDevCompletedState(
-        redditResponse: foldedRemoteFailureOrModel,
+      return emit(GetFlutterDevCompletedState(
+        entries: foldedRemoteFailureOrModel,
       ));
     }
 
@@ -65,9 +65,9 @@ class RedditBloc extends Bloc<RedditEvent, RedditState> {
     if (foldedRemoteFailureOrModel is ResponseFailure) {
       final eitherLocalFailureOrModel = await localRedditRepository.getFlutterDev();
 
-      emit(eitherLocalFailureOrModel.fold(
+      return emit(eitherLocalFailureOrModel.fold(
         (l) => GetFlutterDevFailedState(failure: l),
-        (r) => GetFlutterDevCompletedState(redditResponse: r),
+        (r) => GetFlutterDevCompletedState(entries: r),
       ));
     }
   }

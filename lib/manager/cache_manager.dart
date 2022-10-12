@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:reddit_clone/constants/shared_pref_const.dart';
-import 'package:reddit_clone/model/reddit_response.dart';
+import 'package:reddit_clone/model/entry.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheManager {
@@ -14,17 +14,17 @@ class CacheManager {
     this.sharedPreferences = sharedPreferences;
   }
 
-  Future<void> saveRedditResponse({
-    required RedditResponse redditResponse,
+  Future<void> saveRedditResponses({
+    required List<Entry> entries,
   }) async {
-    await sharedPreferences.setString(
+    await sharedPreferences.setStringList(
       SharedPrefConst.REDDIT_RESPONSE_TAG,
-      jsonEncode(redditResponse.toJson()),
+      entries.map((e) => jsonEncode(e.toJson())).toList(),
     );
   }
 
-  Future<RedditResponse?> getRedditResponse() async {
-    String? jsonInDisk = sharedPreferences.getString(
+  Future<List<Entry>?> getRedditResponses() async {
+    List<String>? jsonInDisk = sharedPreferences.getStringList(
       SharedPrefConst.REDDIT_RESPONSE_TAG,
     );
 
@@ -33,7 +33,7 @@ class CacheManager {
     }
 
     try {
-      return RedditResponse.fromJson(jsonDecode(jsonInDisk));
+      return jsonInDisk.map((e) => Entry.fromJson(jsonDecode(e))).toList();
     } catch (e) {
       // if there is a some bug with local data delete it
       await sharedPreferences.remove(SharedPrefConst.REDDIT_RESPONSE_TAG);
