@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:reddit_clone/gen/assets.gen.dart';
 
 import '../routes/routes.dart';
 
@@ -9,27 +11,42 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    init();
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+  late final AnimationController _controller;
 
-    super.initState();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
-  void init() async {
-    Future.delayed(
-      const Duration(seconds: 1),
-      () => Navigator.of(context).pushReplacementNamed(Routes.HOME),
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2800),
     );
+
+    _controller.addListener(() {
+      if (_controller.isCompleted) {
+        Navigator.of(context).pushReplacementNamed(Routes.HOME);
+      }
+    });
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text('splash_screen'),
+      body: Lottie.asset(
+        Assets.lottie.splash.path,
+        width: double.infinity,
+        fit: BoxFit.cover,
+        controller: _controller,
+        onLoaded: (composition) {
+          _controller.animateTo(1);
+        },
       ),
     );
   }
