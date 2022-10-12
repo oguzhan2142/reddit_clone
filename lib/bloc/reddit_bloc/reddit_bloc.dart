@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_use_case_generator/bloc_generator.dart';
+import 'package:reddit_clone/manager/cache_manager.dart';
 import 'package:reddit_clone/model/reddit_response.dart';
 import 'package:reddit_clone/model/response_failure.dart';
 import 'package:reddit_clone/repository/local_reddit_repository.dart';
@@ -50,11 +51,17 @@ class RedditBloc extends Bloc<RedditEvent, RedditState> {
     final foldedRemoteFailureOrModel = eitherRemoteFailureOrModel.fold((l) => l, (r) => r);
 
     if (foldedRemoteFailureOrModel is RedditResponse) {
+      // if we have got any data then save it local
+      CacheManager.instance.saveRedditResponse(
+        redditResponse: foldedRemoteFailureOrModel,
+      );
+
       emit(GetFlutterDevCompletedState(
         redditResponse: foldedRemoteFailureOrModel,
       ));
     }
 
+    // if we don't have fresh data from api. Check cached data
     if (foldedRemoteFailureOrModel is ResponseFailure) {
       final eitherLocalFailureOrModel = await localRedditRepository.getFlutterDev();
 
