@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/routes/routes.dart';
 
 class App extends StatelessWidget {
+  final _title = 'Reddit App';
+
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      title: _title,
+      initialRoute: Routes.SPLASH,
+      routes: Routes.routes,
     );
   }
 }
