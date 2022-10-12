@@ -15,7 +15,7 @@ class App extends StatelessWidget {
     return BlocBuilder<SettingsBloc, SettingsState>(
       bloc: BlocProvider.of<SettingsBloc>(context),
       builder: (context, state) {
-        ThemeData theme = ThemeManager.instance.lightTheme;
+        ThemeData theme = ThemeManager.instance.getInitialTheme();
         if (state is ChangeThemeCompletedState) {
           theme = state.theme;
         }

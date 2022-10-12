@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/bloc/reddit_bloc/reddit_bloc.dart';
 import 'package:reddit_clone/bloc/settings_bloc/settings_bloc.dart';
+import 'package:reddit_clone/gen/colors.gen.dart';
 import 'package:reddit_clone/manager/theme_manager.dart';
 import 'package:reddit_clone/screen/entry_detail_screen.dart';
 import 'package:reddit_clone/widget/empty_list_widget.dart';
@@ -116,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         const Icon(
                                           Icons.favorite,
+                                          color: ColorName.bourbon,
                                           size: 16,
                                         ),
                                         const SizedBox(width: 5),
