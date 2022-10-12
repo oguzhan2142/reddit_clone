@@ -8,6 +8,8 @@ import 'package:reddit_clone/manager/network_manager.dart';
 import 'package:reddit_clone/repository/local_reddit_repository.dart';
 import 'package:reddit_clone/repository/remote_reddit_repository.dart';
 
+import '../bloc/settings_bloc/settings_bloc.dart';
+
 class AppDependencyWidget extends StatelessWidget {
   final Widget child;
   const AppDependencyWidget({super.key, required this.child});
@@ -27,6 +29,9 @@ class AppDependencyWidget extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => SettingsBloc(),
+        ),
         BlocProvider(
           create: (context) => RedditBloc(
             localRedditRepository: localRedditRepository,

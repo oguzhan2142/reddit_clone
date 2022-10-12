@@ -12,7 +12,7 @@ EntryData _$EntryDataFromJson(Map<String, dynamic> json) => EntryData(
       json['title'] as String?,
       json['ups'] as int?,
       (json['created_utc'] as num?)?.toDouble(),
-      json['description'] as int?,
+      json['description'] as String?,
       json['thumbnail'] as String?,
     );
 

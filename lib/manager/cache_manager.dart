@@ -18,14 +18,14 @@ class CacheManager {
     required List<Entry> entries,
   }) async {
     await sharedPreferences.setStringList(
-      SharedPrefConst.REDDIT_RESPONSE_TAG,
+      SharedPrefConst.ENTRIES_TAG,
       entries.map((e) => jsonEncode(e.toJson())).toList(),
     );
   }
 
   Future<List<Entry>?> getRedditResponses() async {
     List<String>? jsonInDisk = sharedPreferences.getStringList(
-      SharedPrefConst.REDDIT_RESPONSE_TAG,
+      SharedPrefConst.ENTRIES_TAG,
     );
 
     if (jsonInDisk == null) {
@@ -36,7 +36,7 @@ class CacheManager {
       return jsonInDisk.map((e) => Entry.fromJson(jsonDecode(e))).toList();
     } catch (e) {
       // if there is a some bug with local data delete it
-      await sharedPreferences.remove(SharedPrefConst.REDDIT_RESPONSE_TAG);
+      await sharedPreferences.remove(SharedPrefConst.ENTRIES_TAG);
       return null;
     }
   }

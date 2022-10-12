@@ -13,7 +13,7 @@ class EntryData extends BaseModel {
   final int? ups;
   @JsonKey(name: 'created_utc')
   final double? createdUtc;
-  final int? description;
+  final String? description;
   final String? thumbnail;
 
   EntryData(

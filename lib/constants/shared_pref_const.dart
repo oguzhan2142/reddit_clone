@@ -1,3 +1,5 @@
 abstract class SharedPrefConst {
-  static const REDDIT_RESPONSE_TAG = 'reddit_response';
+  static const ENTRIES_TAG = 'entries';
+
+  static const THEME_TAG = 'theme';
 }
