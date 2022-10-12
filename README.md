@@ -1,16 +1,23 @@
-# reddit_clone
+# Reddit Clone
 
-A new Flutter project.
 
-## Getting Started
+## Features
+- Dark theme - light theme
+- Caching data
 
-This project is a starting point for a Flutter application.
+## Screenshots
+  <img src="https://github.com/oguzhan2142/reddit_clone/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202022-10-12%20at%2017.16.42.png" width="200" title="hover text">
+  
+  <img src="https://github.com/oguzhan2142/reddit_clone/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202022-10-12%20at%2017.16.48.png" width="200" title="hover text">
+  
+  <img src="https://github.com/oguzhan2142/reddit_clone/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202022-10-12%20at%2017.16.56.png" width="200" title="hover text">
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Gif
+
+<img src="https://user-images.githubusercontent.com/42682090/195377169-4e30d879-2fb5-4cdf-90d5-95de995725bc.gif" width="300" title="hover text">
+
+
+
+
