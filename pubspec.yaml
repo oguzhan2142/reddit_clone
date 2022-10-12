@@ -30,6 +30,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc_use_case_generator: ^1.0.0
+  dartz: ^0.10.1
+  dio: ^4.0.6
   equatable: ^2.0.5
   flutter:
     sdk: flutter
