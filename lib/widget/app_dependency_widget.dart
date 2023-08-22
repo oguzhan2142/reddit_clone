@@ -19,6 +19,7 @@ class AppDependencyWidget extends StatelessWidget {
     final redditNetworkManager = NetworkManager(
       dio: Dio(BaseOptions(baseUrl: UrlConst.baseRedditUrl)),
     );
+
     final remoteRedditRepository = RemoteRedditRepository(
       networkManager: redditNetworkManager,
     );
@@ -34,8 +35,8 @@ class AppDependencyWidget extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => RedditBloc(
-            localRedditRepository: localRedditRepository,
-            remoteRedditRepository: remoteRedditRepository,
+            remoteRedditRepository,
+            localRedditRepository,
           ),
         )
       ],

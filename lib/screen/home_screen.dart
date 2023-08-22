@@ -42,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
                   icon: Icon(
                     Icons.dark_mode,
-                    color: ThemeManager.instance.isDark() ? Colors.amber : Colors.black,
+                    color: ThemeManager.instance.isDark()
+                        ? Colors.amber
+                        : Colors.black,
                   ),
                 );
               },
@@ -67,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (state is GetFlutterDevCompletedState) {
               if (state.entries.isEmpty) {
-                return const EmptyListWidget(title: 'Herhangi bir kayıt bulunamadı');
+                return const EmptyListWidget(
+                    title: 'Herhangi bir kayıt bulunamadı');
               }
               return RefreshIndicator(
                 onRefresh: () async => redditBloc.add(GetFlutterDevEvent()),

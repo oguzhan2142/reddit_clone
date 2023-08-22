@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: _title,
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.SPLASH,
+          initialRoute: Routes.HOME,
           routes: Routes.routes,
           theme: theme,
         );

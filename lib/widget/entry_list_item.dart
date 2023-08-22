@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/constants/colors.dart';
 import 'package:reddit_clone/model/entry.dart';
 
-import '../gen/colors.gen.dart';
 import '../screen/entry_detail_screen.dart';
 
 class EntryListItem extends StatelessWidget {
@@ -50,7 +50,7 @@ class EntryListItem extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.favorite,
-                        color: ColorName.bourbon,
+                        color: bourbon,
                         size: 16,
                       ),
                       const SizedBox(width: 5),

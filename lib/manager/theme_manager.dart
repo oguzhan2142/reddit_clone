@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/gen/colors.gen.dart';
+import 'package:reddit_clone/constants/colors.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/shared_pref_const.dart';
 
-final MaterialColor primarySwatch = MaterialColor(ColorName.bourbon.value, {
-  50: ColorName.bourbon.withOpacity(.1),
-  100: ColorName.bourbon..withOpacity(.2),
-  200: ColorName.bourbon..withOpacity(.3),
-  300: ColorName.bourbon..withOpacity(.4),
-  400: ColorName.bourbon..withOpacity(.5),
-  500: ColorName.bourbon..withOpacity(.6),
-  600: ColorName.bourbon..withOpacity(.7),
-  700: ColorName.bourbon..withOpacity(.8),
-  800: ColorName.bourbon..withOpacity(.9),
-  900: ColorName.bourbon..withOpacity(1),
+final MaterialColor primarySwatch = MaterialColor(bourbon.value, {
+  50: bourbon.withOpacity(.1),
+  100: bourbon..withOpacity(.2),
+  200: bourbon..withOpacity(.3),
+  300: bourbon..withOpacity(.4),
+  400: bourbon..withOpacity(.5),
+  500: bourbon..withOpacity(.6),
+  600: bourbon..withOpacity(.7),
+  700: bourbon..withOpacity(.8),
+  800: bourbon..withOpacity(.9),
+  900: bourbon..withOpacity(1),
 });
 
 class ThemeManager {
@@ -27,8 +28,9 @@ class ThemeManager {
   final _darkTheme = ThemeData.dark();
   final _lightTheme = ThemeData(
     primarySwatch: primarySwatch,
-    scaffoldBackgroundColor: ColorName.offYellow,
-    appBarTheme: const AppBarTheme(color: ColorName.bourbon),
+    cardTheme: CardTheme(color: bourbon),
+    scaffoldBackgroundColor: diSerria,
+    appBarTheme: const AppBarTheme(color: bourbon),
   );
 
   ThemeData getInitialTheme() {
